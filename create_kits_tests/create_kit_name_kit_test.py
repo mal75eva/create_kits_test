@@ -1,5 +1,8 @@
+from http.client import responses
+
 import data
 import sender_stand_request
+from create_kits_tests.data import kit_body
 
 
 #Функция, меняющая содержимое тела запроса
@@ -60,7 +63,8 @@ def test_numbers_in_the_name_get_success_response():
 
 #Тест 10
 def test_no_symbols_in_the_name_get_error_response():
-    negative_assert_code_400()
+    response = sender_stand_request.post_new_user_kit({}, sender_stand_request.get_new_user_token())
+    assert response.status_code == 400
 
 #Тест 11
 def test_other_type_of_date_in_the_name_get_error_response():
